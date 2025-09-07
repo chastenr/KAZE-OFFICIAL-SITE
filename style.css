@@ -1,0 +1,96 @@
+/* Reset and base styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Helvetica Neue', sans-serif;
+  color: rgb(240, 240, 240);
+  background: url('background.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* Navigation */
+.navbar {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.navbar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: inline-flex;
+  gap: 40px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: rgb(240, 240, 240);
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+  color: #ccc;
+}
+
+/* Center content */
+.center-content {
+  text-align: center;
+  margin-top: -10vh;
+}
+
+.center-content h1 {
+  font-size: 15rem;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 1.0rem;
+  margin-bottom: 5px;
+  font-style: italic;
+}
+
+.translation {
+  font-size: 0.5rem;
+  margin-bottom: 30px;
+  letter-spacing: 1px;
+}
+
+.see-more {
+  font-size: 0.9rem;
+  color: #aaa;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.see-more:hover {
+  color: rgb(240, 240, 240);
+}
+
+.video-container {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: -1;
+}
+
+.overlay-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: white;
+  top: 40%;
+  transform: translateY(-50%);
+}
+
