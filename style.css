@@ -209,10 +209,28 @@ video {
 }
 
 /* Mobile Hamburger Menu */
+/* Mobile Hamburger Menu */
 @media (max-width: 768px) {
+  .nav-links {
+    display: none; 
+    flex-direction: column;
+    gap: 20px;
+ 
+    padding: 20px;
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    border-radius: 10px;
+    z-index: 49;
+  }
+
+  .nav-links.show {
+    display: flex !important; /* force display when toggled */
+  }
+
   .menu-toggle {
-    display: block; /* show hamburger on mobile */
-    position: fixed; /* fixed to stay visible */
+    display: block;
+    position: fixed;
     right: 20px;
     top: 20px;
     font-size: 1.8rem;
@@ -220,26 +238,10 @@ video {
     border: none;
     color: white;
     cursor: pointer;
-    z-index: 50; /* above nav-links */
-  }
-
-  .nav-links {
-    display: none; /* hidden by default */
-    flex-direction: column;
-    gap: 20px;
-    background: rgba(0,0,0,0.95);
-    padding: 20px;
-    position: fixed;
-    top: 60px;
-    right: 20px;
-    border-radius: 10px;
-    z-index: 49; /* below hamburger */
-  }
-
-  .nav-links.show {
-    display: flex; /* visible when toggled */
+    z-index: 50;
   }
 }
+
 
 /* Product Gallery */
 /* ===== Product Section ===== */

@@ -20,9 +20,6 @@ function loadPage(page) {
         if (page === "home") initHome();
         if (page === "product") initProductCarousel();
 
-        // Re-init hamburger menu after page load
-        initNavbarToggle();
-
         // Fade-in new content
         app.classList.remove("fade-out");
         app.classList.add("fade-in");
@@ -106,34 +103,28 @@ function initProductCarousel() {
 }
 
 // ------------------------------
-// Hamburger Menu Toggle
+// Mobile Hamburger Menu (SPA-safe)
 // ------------------------------
-function initNavbarToggle() {
-  const menuToggle = document.querySelector(".menu-toggle");
+// Works even after SPA page loads
+document.addEventListener("click", (e) => {
   const navLinks = document.querySelector(".nav-links");
-  if (!menuToggle || !navLinks) return;
+  if (!navLinks) return;
 
-  // Remove previous listeners to prevent duplicates
-  menuToggle.replaceWith(menuToggle.cloneNode(true));
-  const newToggle = document.querySelector(".menu-toggle");
-
-  newToggle.addEventListener("click", () => {
+  // Toggle menu when hamburger clicked
+  if (e.target.matches(".menu-toggle")) {
     navLinks.classList.toggle("show");
-  });
+  }
 
-  navLinks.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-      navLinks.classList.remove("show");
-    });
-  });
-}
+  // Close menu when a nav link is clicked
+  if (e.target.closest(".nav-links a")) {
+    navLinks.classList.remove("show");
+  }
+});
 
 // ------------------------------
-// Setup SPA Routes
+// SPA Routing
 // ------------------------------
 document.addEventListener("DOMContentLoaded", () => {
-  initNavbarToggle(); // Init menu for first page load
-
   // SPA routing with page.js
   page("/", () => loadPage("home"));
   page("/about", () => loadPage("about"));
