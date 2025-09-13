@@ -16,14 +16,17 @@ function loadPage(page) {
       .then((html) => {
         app.innerHTML = html;
 
-        // Run init only for home page
+        // Page-specific init
         if (page === "home") initHome();
+        if (page === "product") initProductCarousel();
+
+        // Re-init hamburger menu after page load
+        initNavbarToggle();
 
         // Fade-in new content
         app.classList.remove("fade-out");
         app.classList.add("fade-in");
-
-        setTimeout(() => app.classList.remove("fade-in"), 500); // cleanup
+        setTimeout(() => app.classList.remove("fade-in"), 500);
       })
       .catch((err) => {
         console.error("Error loading page:", err);
@@ -31,7 +34,7 @@ function loadPage(page) {
           "<p style='color:red; text-align:center;'>⚠️ Failed to load page.</p>";
         app.classList.remove("fade-out");
       });
-  }, 300); // matches fade-out duration
+  }, 300);
 }
 
 // ------------------------------
@@ -45,13 +48,11 @@ function initHome() {
 
   if (!overlay || !title) return;
 
-  // Show overlay with fade-in
   overlay.style.opacity = 0;
   setTimeout(() => {
     overlay.style.opacity = 1;
   }, 500);
 
-  // Glow + text cycle
   function changeText() {
     title.classList.remove("glow");
     title.style.opacity = 0;
@@ -69,30 +70,75 @@ function initHome() {
 }
 
 // ------------------------------
+// Product Carousel
+// ------------------------------
+function initProductCarousel() {
+  const track = document.querySelector(".carousel-track");
+  if (!track) return;
+
+  const slides = Array.from(track.children);
+  const nextBtn = document.querySelector(".carousel-btn.next");
+  const prevBtn = document.querySelector(".carousel-btn.prev");
+  if (!nextBtn || !prevBtn) return;
+
+  let currentIndex = 0;
+
+  function updateCarousel() {
+    const slideWidth = slides[0].getBoundingClientRect().width;
+    track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+  }
+
+  nextBtn.addEventListener("click", () => {
+    currentIndex = (currentIndex + 1) % slides.length;
+    updateCarousel();
+  });
+
+  prevBtn.addEventListener("click", () => {
+    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    updateCarousel();
+  });
+
+  // Auto-slide every 5 seconds
+  setInterval(() => {
+    currentIndex = (currentIndex + 1) % slides.length;
+    updateCarousel();
+  }, 5000);
+}
+
+// ------------------------------
+// Hamburger Menu Toggle
+// ------------------------------
+function initNavbarToggle() {
+  const menuToggle = document.querySelector(".menu-toggle");
+  const navLinks = document.querySelector(".nav-links");
+  if (!menuToggle || !navLinks) return;
+
+  // Remove previous listeners to prevent duplicates
+  menuToggle.replaceWith(menuToggle.cloneNode(true));
+  const newToggle = document.querySelector(".menu-toggle");
+
+  newToggle.addEventListener("click", () => {
+    navLinks.classList.toggle("show");
+  });
+
+  navLinks.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      navLinks.classList.remove("show");
+    });
+  });
+}
+
+// ------------------------------
 // Setup SPA Routes
 // ------------------------------
 document.addEventListener("DOMContentLoaded", () => {
-  // Hamburger menu toggle
-  const menuToggle = document.querySelector(".menu-toggle");
-  const navLinks = document.querySelector(".nav-links");
-
-  if (menuToggle && navLinks) {
-    menuToggle.addEventListener("click", () => {
-      navLinks.classList.toggle("show");
-    });
-
-    // Close menu when clicking a nav link (mobile)
-    navLinks.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => {
-        navLinks.classList.remove("show");
-      });
-    });
-  }
+  initNavbarToggle(); // Init menu for first page load
 
   // SPA routing with page.js
   page("/", () => loadPage("home"));
   page("/about", () => loadPage("about"));
   page("/accs", () => loadPage("accs"));
+  page("/product", () => loadPage("product"));
 
   // Redirect if user hits /index.html
   if (location.pathname === "/index.html") page.redirect("/");
