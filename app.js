@@ -1,7 +1,10 @@
+// ------------------------------
+// SPA Page Loader
+// ------------------------------
 function loadPage(page) {
   const app = document.getElementById("app");
 
-  // 🔹 Add fade-out before loading new content
+  // Fade-out before loading new content
   app.classList.add("fade-out");
 
   setTimeout(() => {
@@ -13,16 +16,14 @@ function loadPage(page) {
       .then((html) => {
         app.innerHTML = html;
 
-        // Run init only if home.html
-        if (page === "home") {
-          initHome();
-        }
+        // Run init only for home page
+        if (page === "home") initHome();
 
-        // 🔹 Fade-in new content
+        // Fade-in new content
         app.classList.remove("fade-out");
         app.classList.add("fade-in");
 
-        setTimeout(() => app.classList.remove("fade-in"), 500); // clean up
+        setTimeout(() => app.classList.remove("fade-in"), 500); // cleanup
       })
       .catch((err) => {
         console.error("Error loading page:", err);
@@ -33,6 +34,9 @@ function loadPage(page) {
   }, 300); // matches fade-out duration
 }
 
+// ------------------------------
+// Home Page Animation
+// ------------------------------
 function initHome() {
   const title = document.getElementById("kaze");
   const overlay = document.querySelector(".center-content");
@@ -47,7 +51,7 @@ function initHome() {
     overlay.style.opacity = 1;
   }, 500);
 
-  // 🔹 Glow + text cycle
+  // Glow + text cycle
   function changeText() {
     title.classList.remove("glow");
     title.style.opacity = 0;
@@ -64,15 +68,34 @@ function initHome() {
   setInterval(changeText, 5000);
 }
 
-// 🔹 Setup routes
+// ------------------------------
+// Setup SPA Routes
+// ------------------------------
 document.addEventListener("DOMContentLoaded", () => {
+  // Hamburger menu toggle
+  const menuToggle = document.querySelector(".menu-toggle");
+  const navLinks = document.querySelector(".nav-links");
+
+  if (menuToggle && navLinks) {
+    menuToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("show");
+    });
+
+    // Close menu when clicking a nav link (mobile)
+    navLinks.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("show");
+      });
+    });
+  }
+
+  // SPA routing with page.js
   page("/", () => loadPage("home"));
   page("/about", () => loadPage("about"));
   page("/accs", () => loadPage("accs"));
 
-  if (location.pathname === "/index.html") {
-    page.redirect("/");
-  }
+  // Redirect if user hits /index.html
+  if (location.pathname === "/index.html") page.redirect("/");
 
   page();
 });

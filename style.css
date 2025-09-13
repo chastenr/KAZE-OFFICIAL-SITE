@@ -151,3 +151,100 @@ video {
 #app.fade-in {
   opacity: 1;
 }
+/* Desktop: keep current absolute behavior but vertically center it */
+.logo {
+  position: absolute;
+  width: 80px;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+}
+
+/* Make sure the ul aligns items vertically (desktop) */
+.navbar ul {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* MOBILE: stack logo above the nav and make it part of flow */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;    /* stack logo + nav */
+    justify-content: center;
+    align-items: center;
+    padding: 12px 16px;
+    top: 1vh;
+  }
+
+  .navbar ul {
+    display: flex;
+    flex-direction: column;    /* vertical nav links */
+    gap: 18px;
+    align-items: center;
+    margin-top: 0;
+  }
+
+  .logo {
+    position: static;         /* puts logo back into document flow */
+    transform: none;
+    margin-bottom: 10px;
+    width: 72px;              /* slightly smaller on mobile */
+    left: auto;
+    top: auto;
+  }
+}
+/* Default (desktop) */
+.menu-toggle {
+  display: none; /* hidden on desktop */
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+/* Mobile view */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;   /* show hamburger */
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 1.8rem;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    z-index: 10;
+  }
+
+  .nav-links {
+    display: none;          /* hide by default on mobile */
+    flex-direction: column;
+    gap: 20px;
+    background: rgba(0,0,0,0.85);
+    padding: 20px;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    border-radius: 10px;
+  }
+
+  .nav-links.show {
+    display: flex;          /* show when toggled */
+  }
+}
+.nav-links {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.nav-links.show {
+  max-height: 300px; /* adjust depending on number of links */
+}
