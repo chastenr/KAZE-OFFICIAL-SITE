@@ -137,3 +137,17 @@ video {
   text-align: center;
   color: white;
 }
+
+/* 🔹 Page transition effects */
+#app {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+#app.fade-out {
+  opacity: 0;
+}
+
+#app.fade-in {
+  opacity: 1;
+}

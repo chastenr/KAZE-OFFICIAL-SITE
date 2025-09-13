@@ -1,46 +1,51 @@
 function loadPage(page) {
   const app = document.getElementById("app");
 
-  // Show placeholder while waiting
-  app.innerHTML = "<p style='text-align:center; color:white;'>Loading...</p>";
+  // 🔹 Add fade-out before loading new content
+  app.classList.add("fade-out");
 
-  fetch(`/pages/${page}.html`)
-    .then((res) => {
-      if (!res.ok) throw new Error("Page not found");
-      return res.text();
-    })
-    .then((html) => {
-      app.innerHTML = html;
+  setTimeout(() => {
+    fetch(`/pages/${page}.html`)
+      .then((res) => {
+        if (!res.ok) throw new Error("Page not found");
+        return res.text();
+      })
+      .then((html) => {
+        app.innerHTML = html;
 
-      // Run init only if home.html
-      if (page === "home") {
-        initHome();
-      }
-    })
-    .catch((err) => {
-      console.error("Error loading page:", err);
-      app.innerHTML =
-        "<p style='color:red; text-align:center;'>⚠️ Failed to load page.</p>";
-    });
+        // Run init only if home.html
+        if (page === "home") {
+          initHome();
+        }
+
+        // 🔹 Fade-in new content
+        app.classList.remove("fade-out");
+        app.classList.add("fade-in");
+
+        setTimeout(() => app.classList.remove("fade-in"), 500); // clean up
+      })
+      .catch((err) => {
+        console.error("Error loading page:", err);
+        app.innerHTML =
+          "<p style='color:red; text-align:center;'>⚠️ Failed to load page.</p>";
+        app.classList.remove("fade-out");
+      });
+  }, 300); // matches fade-out duration
 }
 
 function initHome() {
-  const video = document.querySelector("video");
-  const overlay = document.querySelector(".center-content");
   const title = document.getElementById("kaze");
+  const overlay = document.querySelector(".center-content");
   const texts = ["カゼ", "KAZE"];
   let i = 0;
 
-  if (!video || !overlay || !title) return;
+  if (!overlay || !title) return;
 
-  // Hide overlay initially
+  // Show overlay with fade-in
   overlay.style.opacity = 0;
-
-  // When video ends → freeze & fade in overlay
-  video.addEventListener("ended", () => {
-    video.pause();
+  setTimeout(() => {
     overlay.style.opacity = 1;
-  });
+  }, 500);
 
   // 🔹 Glow + text cycle
   function changeText() {
@@ -61,22 +66,13 @@ function initHome() {
 
 // 🔹 Setup routes
 document.addEventListener("DOMContentLoaded", () => {
-  // Define routes
   page("/", () => loadPage("home"));
   page("/about", () => loadPage("about"));
   page("/accs", () => loadPage("accs"));
 
-  // Redirect /index.html → /
   if (location.pathname === "/index.html") {
     page.redirect("/");
   }
 
-  // Start router
   page();
-
-  // ✅ Load current page instantly (fallback to home)
-  const currentPath = location.pathname === "/" ? "/home" : location.pathname;
-  if (currentPath.includes("about")) loadPage("about");
-  else if (currentPath.includes("accs")) loadPage("accs");
-  else loadPage("home"); // default to home
 });
