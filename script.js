@@ -21,3 +21,23 @@ video.addEventListener("ended", () => {
     overlay.style.opacity = 1;
   }
 });
+window.onload = function() {
+  const title = document.getElementById("kaze");
+  const texts = ["カゼ", "KAZE", ];
+  let i = 0;
+
+  function changeText() {
+    title.classList.remove("glow"); 
+    title.style.opacity = 0;
+
+    setTimeout(() => {
+      title.innerText = texts[i];
+      title.classList.add("glow");
+      title.style.opacity = 1;
+      i = (i + 1) % texts.length;
+    }, 1000);
+  }
+
+  changeText();
+  setInterval(changeText, 5000);
+};

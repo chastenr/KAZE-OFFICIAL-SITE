@@ -10,8 +10,17 @@ body, html {
 
 /* Navigation */
 .navbar {
-  text-align: center;
+  position: relative;
   padding: 20px 0;
+  display: flex;
+  align-items: center;
+  top: 2vh;
+  justify-content: center; /* centers the nav links */
+}
+.logo {
+  position: absolute;
+  width: 80px;
+  left: 20px;  /* keep logo on the left */
 }
 
 .navbar ul {
@@ -36,13 +45,21 @@ body, html {
 
 /* Center content */
 .center-content {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   text-align: center;
-  margin-top: -10vh;
+  z-index: 1;
+  width: 100%;
+  pointer-events: none; /* optional: avoids blocking clicks */
 }
 
 .center-content h1 {
-  font-size: 15rem;
+  font-size: clamp(4rem, 15vw, 12rem);
   margin-bottom: 10px;
+  line-height: 1;        /* keeps height consistent */
+  display: inline-block; /* fixes glow shifting */
 }
 
 .subtitle {
@@ -103,4 +120,14 @@ video {
   top: 40%;
   transform: translateY(-50%);
 }
+.kaze {
+  font-size: 4rem;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
+  text-align: center;
+  opacity: 1;
+  transition: opacity 1s ease-in-out, text-shadow 1s ease-in-out;
+
+}
+.kaze.glow { text-shadow: 0 0 5px rgb(238, 238, 238), 0 0 20px rgb(236, 236, 236) }
 
