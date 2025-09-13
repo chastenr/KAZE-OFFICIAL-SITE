@@ -45,14 +45,13 @@ body, html {
 
 /* Center content */
 .center-content {
-  position: fixed;
-  top: 40%;
+  position: absolute;        /* not fixed */
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  z-index: 1;
   width: 100%;
-  pointer-events: none; /* optional: avoids blocking clicks */
+  padding: 0 20px;
 }
 
 .center-content h1 {
@@ -122,6 +121,7 @@ video {
 }
 .kaze {
   font-size: 4rem;
+  
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: white;
   text-align: center;
@@ -131,3 +131,9 @@ video {
 }
 .kaze.glow { text-shadow: 0 0 5px rgb(238, 238, 238), 0 0 20px rgb(236, 236, 236) }
 
+.more-content {
+  margin-top: 100vh;  /* pushes it below the full screen hero */
+  padding: 50px 20px;
+  text-align: center;
+  color: white;
+}
