@@ -1,5 +1,5 @@
 * {
-  outline: 1px solid red;
+  /* outline: 1px solid red; */
   box-sizing: border-box;
   font-family: 'Lato', sans-serif;
 }
@@ -23,6 +23,11 @@ html {
   align-items: center;
   justify-content: center;
   /* centers the nav links */
+}
+
+.navbar-sect{
+  padding-top: 2vh;
+  padding-bottom: 1vh;
 }
 
 .logo {
