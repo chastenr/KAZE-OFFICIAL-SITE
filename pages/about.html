@@ -1,4 +1,108 @@
-<section>
-  <h2>Welcome to KAZE</h2>
-  <p>This is the home page.</p>
-</section>
+<div class="about-wrapper reveal-page">
+  <!-- Hero Section -->
+  <section class="about-hero reveal">
+    <div>
+      <h1>About <span>Kaze</span></h1>
+      <p>We craft minimalist tech accessories inspired by Japanese design — blending style, utility, and sustainability.</p>
+    </div>
+  </section>
+
+  <!-- Mission & Vision -->
+  <section class="mv-grid reveal">
+    <div class="mission">
+      <h2>Our Mission</h2>
+      <p>To power your life with smart, stylish, and sustainable tech gear.</p>
+    </div>
+    <div class="vision">
+      <h2>Our Vision</h2>
+      <p>To be a global leader in minimalist technology accessories built for everyday life.</p>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="reveal">
+    <h2>Our Core Values</h2>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="icon">⚡</div>
+        <h3>Innovation</h3>
+        <p>Always improving, always evolving.</p>
+      </div>
+      <div class="value-card">
+        <div class="icon">🌱</div>
+        <h3>Sustainability</h3>
+        <p>Eco-friendly designs that last.</p>
+      </div>
+      <div class="value-card">
+        <div class="icon">🎌</div>
+        <h3>Minimalism</h3>
+        <p>Inspired by Japanese simplicity.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section class="reveal">
+    <h2>Meet the Team</h2>
+    <div class="team-grid">
+      <div class="team-member">
+        <img src="team1.jpg" alt="Team Member">
+        <h3>Chasten Ramirez</h3>
+        <p>Founder & Designer</p>
+      </div>
+      <div class="team-member">
+        <img src="team2.jpg" alt="Team Member">
+        <h3>Jane Doe</h3>
+        <p>Marketing Lead</p>
+      </div>
+      <div class="team-member">
+        <img src="team3.jpg" alt="Team Member">
+        <h3>John Smith</h3>
+        <p>Product Engineer</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="reveal">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq">
+      <div class="faq-item">
+        <button class="faq-question">Where do you ship?</button>
+        <div class="faq-answer">We ship nationwide and will soon expand worldwide.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Do you offer warranty?</button>
+        <div class="faq-answer">Yes, all products come with a 1-year warranty.</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  // FAQ Toggle
+  document.querySelectorAll(".faq-question").forEach(btn => {
+    btn.addEventListener("click", () => {
+      btn.nextElementSibling.style.display =
+        btn.nextElementSibling.style.display === "block" ? "none" : "block";
+    });
+  });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll(".reveal");
+  window.addEventListener("scroll", () => {
+    for (let i = 0; i < reveals.length; i++) {
+      const windowHeight = window.innerHeight;
+      const revealTop = reveals[i].getBoundingClientRect().top;
+      const revealPoint = 120;
+      if (revealTop < windowHeight - revealPoint) {
+        reveals[i].classList.add("active");
+      }
+    }
+  });
+
+  // Fade in page on load
+  window.addEventListener("load", () => {
+    document.querySelector(".reveal-page").classList.add("show");
+  });
+</script>
