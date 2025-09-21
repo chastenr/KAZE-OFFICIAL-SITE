@@ -35,7 +35,7 @@ function loadPage(page) {
 }
 
 // ------------------------------
-// Home Page Animation
+// Home Page Animation + Video Logic
 // ------------------------------
 function initHome() {
   const title = document.getElementById("kaze");
@@ -45,11 +45,13 @@ function initHome() {
 
   if (!overlay || !title) return;
 
+  // Fade-in overlay
   overlay.style.opacity = 0;
   setTimeout(() => {
     overlay.style.opacity = 1;
   }, 500);
 
+  // Text swap animation
   function changeText() {
     title.classList.remove("glow");
     title.style.opacity = 0;
@@ -64,6 +66,21 @@ function initHome() {
 
   changeText();
   setInterval(changeText, 5000);
+
+  // 🔹 Video background → fallback color after end
+  const video = document.getElementById("bg-video");
+  const container = document.querySelector(".video-container");
+
+  if (video && container) {
+    video.addEventListener(
+      "ended",
+      () => {
+        video.style.display = "none"; // hide video
+        container.style.background = "#111"; // or use fallback image
+      },
+      { once: true } // only fire once
+    );
+  }
 }
 
 // ------------------------------
@@ -105,7 +122,6 @@ function initProductCarousel() {
 // ------------------------------
 // Mobile Hamburger Menu (SPA-safe)
 // ------------------------------
-// Works even after SPA page loads
 document.addEventListener("click", (e) => {
   const navLinks = document.querySelector(".nav-links");
   if (!navLinks) return;

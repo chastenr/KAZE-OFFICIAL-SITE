@@ -47,46 +47,94 @@
 </head>
 
 <body>
+  <!-- 🔹 Page Wrapper -->
+  <div class="page-wrapper">
 
-  <!-- 🔹 Video Background -->
+    <!-- Video Background -->
   <div class="video-container">
-    <video autoplay muted playsinline>
-      <source src="https://res.cloudinary.com/dczzibbkw/video/upload/v1757941618/bg_i61r89.webm" type="video/webm">
-      <source src="https://res.cloudinary.com/dczzibbkw/video/upload/v1757941885/bigg_d2cnic.mp4" type="video/mp4">
-      Your browser does not support HTML5 video.
-    </video>
-  </div>
-
-  <!-- 🔹 Navigation Bar -->
-  <section class="navbar-sect">
-    <nav class="navbar">
-      <!-- Left: Navigation Links -->
-      <ul class="nav-links">
-        <li><a href="/" data-link>Home</a></li>
-        <li><a href="/product" data-link>Product</a></li>
-        <li><a href="/about" data-link>About</a></li>
-      </ul>
-
-     <!-- Center: logo -->
-    <a href="index.html" class="logo-link">
-      <img src="Image/Kaze-logo-white-256.webp" alt="KAZE Logo" class="logo">
-    </a>
-
-      <!-- Right: Menu Toggle -->
-      <button class="menu-toggle" aria-label="Toggle-menu">☰</button>
-    </nav>
-  </section>
-
-  <!-- 🔹 SPA container -->
-  <div id="app">
-    <!-- home.html content will be injected here -->
-  </div>
-
-  <!-- Ads / Scripts -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5801420512342063"
-    crossorigin="anonymous"></script>
+  <video autoplay muted playsinline id="bg-video">
+    <source src="https://res.cloudinary.com/dczzibbkw/video/upload/v1757941618/bg_i61r89.webm" type="video/webm">
+    <source src="https://res.cloudinary.com/dczzibbkw/video/upload/v1757941885/bigg_d2cnic.mp4" type="video/mp4">
+  </video>
+</div>
+    
   <script src="https://unpkg.com/page/page.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="app.js"></script>
   <script src="about.js"></script>
+    <!-- 🔹 Navigation -->
+    <section class="navbar-sect">
+      <nav class="navbar">
+        <!-- Left -->
+        <ul class="nav-links">
+          <li><a href="/" data-link>Home</a></li>
+          <li><a href="/product" data-link>Product</a></li>
+          <li><a href="/about" data-link>About</a></li>
+        </ul>
+
+        <!-- Center Logo -->
+        <a href="/" class="logo-link">
+          <img src="image/Kaze-logo-white-256.webp" alt="KAZE Logo" class="logo">
+        </a>
+
+        <!-- Right -->
+        <button class="menu-toggle" aria-label="Toggle-menu">☰</button>
+      </nav>
+    </section>
+
+    <!-- 🔹 SPA Content -->
+    <main id="app">
+      <!-- home.html content injected here -->
+    </main>
+
+</div> <!-- End page-wrapper -->
+
+<!-- 🔹 Footer -->
+<footer class="footer">
+  <div class="footer-container">
+    <!-- Brand -->
+    <div class="footer-section">
+      <h3>KAZE</h3>
+      <p>Modern Tech, Quiet Design.<br>
+        Power banks & tech accessories crafted with simplicity and style.</p>
+    </div>
+
+    <!-- Links -->
+    <div class="footer-section">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/products">Products</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Support -->
+    <div class="footer-section">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="/faq">FAQ</a></li>
+        <li><a href="/shipping">Shipping & Returns</a></li>
+        <li><a href="/privacy">Privacy Policy</a></li>
+        <li><a href="/terms">Terms of Service</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact -->
+    <div class="footer-section">
+      <h4>Get in Touch</h4>
+      <p>Email: <a href="mailto:support@kaze.ph">support@kaze.ph</a></p>
+      <div class="social-links">
+        <a href="#"><img src="icons/facebook.svg" alt="Facebook"></a>
+        <a href="#"><img src="icons/instagram.svg" alt="Instagram"></a>
+        <a href="#"><img src="icons/twitter.svg" alt="Twitter"></a>
+      </div>
+    </div>
+  </div>
+
+ 
+
 </body>
+
 </html>
