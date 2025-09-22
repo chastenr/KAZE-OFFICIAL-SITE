@@ -9,7 +9,6 @@ html, body {
   height: 100%;
   margin: 0;
   display: flex;
-  background: #313131;
   flex-direction: column; /* stack: header | app | footer */
 }
 
@@ -233,7 +232,7 @@ body {
   display: flex;
   flex-direction: column;
   font-family: "Raleway", sans-serif;
-  background-color: #000; /* black background */
+
   color: #fff; /* white text */
   min-height: 100vh;
 }
@@ -391,7 +390,6 @@ footer {
   padding: 1em;
   text-align: center;
   color: #ccc;
-  background-color: #111;
 }
 
 footer a {
