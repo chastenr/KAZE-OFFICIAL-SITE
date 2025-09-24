@@ -1,7 +1,7 @@
 /* ========== GLOBAL RESET & BASE ========== */
 * {
   box-sizing: border-box;
-  font-family: 'Lato', sans-serif;
+  font-family: Courier New', Courier, monospace;
   /* outline: 1px solid red; */ /* debugging */
 }
 
@@ -30,12 +30,35 @@ html, body {
   list-style: none;
   display: flex;
   gap: 40px;
-  margin: 0;
-  padding: 0;
-  align-items: center;
-  justify-content: flex-start;
-  flex: 1;
+  margin: 40px auto;
+  font-family: "Trebuchet MS", sans-serif;
+  padding: 20px 60px;
+  max-width: 900px;
+  position: relative;
+  color: white;
 }
+
+.nav-links::before,
+.nav-links::after {
+  content: "";
+  position: absolute;
+  left: 15%;   /* start point */
+  right: 15%;  /* end point */
+  height: 1px;
+  background: white;
+}
+
+.nav-links::before {
+  top: 0;      /* top line */
+}
+.nav-links::after {
+  bottom: 0;   /* bottom line */
+}
+
+nav-links::before {
+left: 1px solid;  /* top line */
+}
+
 
 .nav-links li a {
   text-decoration: none;
@@ -121,7 +144,7 @@ html, body {
   display: flex;
   justify-content: center; /* horizontal center */
   align-items: center;     /* vertical center */
-  min-height: 80vh;        /* takes most of viewport height */
+  min-height: 60vh;        /* takes most of viewport height */
   text-align: center;
   padding: 0 20px;
 }
