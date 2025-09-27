@@ -18,8 +18,13 @@ function loadPage(page) {
 
         // Page-specific init
         if (page === "home") initHome();
-        if (page === "product") initProductCarousel();
-
+        if (page === "product") {
+          // load model-viewer, then run product carousel init
+          loadModelViewerOnce(() => {
+            // optional: further JS to interact with the viewer can go here
+            initProductCarousel();
+          });
+        }
         // Fade-in new content
         app.classList.remove("fade-out");
         app.classList.add("fade-in");
@@ -152,3 +157,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
   page();
 });
+
+
+
+// Lazy load model-viewer for product page (only once)
+function loadModelViewerOnce(callback) {
+  if (window._modelViewerLoaded) {
+    if (callback) callback();
+    return;
+  }
+
+  // Use module build (modern browsers)
+  const s = document.createElement("script");
+  s.type = "module";
+  s.src = "https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js";
+  s.onload = () => {
+    window._modelViewerLoaded = true;
+    console.log("model-viewer loaded");
+    if (callback) callback();
+  };
+  s.onerror = () => {
+    console.error("Failed to load model-viewer script.");
+    if (callback) callback();
+  };
+  document.head.appendChild(s);
+}
