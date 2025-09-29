@@ -1,10 +1,16 @@
-<body class="bg-gray-50">
+<body>
     <!-- Product Section -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <main class="product-page-info">
         <div class="lg:grid lg:grid-cols-2 lg:gap-12">
             <!-- Product Gallery -->
             <div class="mb-8 lg:mb-0">
-                <div class="product-gallery flex overflow-x-auto space-x-4 pb-4 mb-4">
+                <model-viewer id="product-viewer"
+                    src="https://res.cloudinary.com/dczzibbkw/image/upload/v1758918395/Kaze_Device_0915172902_texture_o8k4af.glb"
+                    alt="KAZE Power Bank A28 3D model" poster="/image/Kaze-logo-white-256.webp" loading="lazy"
+                    camera-controls auto-rotate exposure="1" ar ar-modes="webxr scene-viewer quick-look"
+                    style="width:100%; height:100%; min-height:320px; border-radius:6px;">
+                </model-viewer>
+                <!-- <div class="product-gallery flex overflow-x-auto space-x-4 pb-4 mb-4">
                     <div class="gallery-item flex-shrink-0 w-full">
                         <img src="http://static.photos/technology/1024x576/101" alt="KAZE PowerBank Front View"
                             class="rounded-lg w-full h-auto">
@@ -31,12 +37,12 @@
                         <img src="http://static.photos/technology/200x200/103" alt="Thumbnail 3"
                             class="w-full h-full object-cover">
                     </button>
-                </div>
+                </div> -->
             </div>
 
             <!-- Product Info -->
             <div>
-                <h1 class="text-3xl font-bold text-gray-900 mb-2">KAZE Ultra-Fast PowerBank</h1>
+                <h1 class="text-3xl font-bold text-gray-900 mb-2">KAZE Ultra-Fast PowerBank A26</h1>
                 <div class="flex items-center mb-4">
                     <div class="flex text-yellow-400 mr-2">
                         <i data-feather="star" class="w-4 h-4 fill-current"></i>
@@ -59,21 +65,21 @@
                     <p class="text-green-600 text-sm mt-1">In Stock (Ready to Ship)</p>
                 </div>
 
-                <div class="mb-6">
+                <!-- <div class="mb-6">
                     <h3 class="font-medium text-gray-900 mb-2">Color</h3>
                     <div class="flex space-x-3">
                         <button class="w-8 h-8 rounded-full bg-gray-800 border-2 border-gray-800"></button>
                         <button class="w-8 h-8 rounded-full bg-blue-500 border-2 border-gray-200"></button>
                         <button class="w-8 h-8 rounded-full bg-red-500 border-2 border-gray-200"></button>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="mb-6">
                     <h3 class="font-medium text-gray-900 mb-2">Capacity</h3>
                     <div class="flex space-x-3">
                         <button class="px-4 py-2 border border-gray-300 rounded-md">10,000mAh</button>
                         <button
-                            class="px-4 py-2 border border-gray-300 rounded-md bg-indigo-100 border-indigo-500">20,000mAh</button>
+                            class="px-4 py-2 border border-gray-300 rounded-md bg-indigo-100 border-indigo-500">26,500mAh</button>
                         <button class="px-4 py-2 border border-gray-300 rounded-md">30,000mAh</button>
                     </div>
                 </div>
@@ -148,7 +154,7 @@
                         </div>
                         <div class="flex justify-between border-b border-gray-100 pb-2">
                             <span class="text-gray-600">Capacity</span>
-                            <span class="font-medium">20,000mAh</span>
+                            <span class="font-medium">26,500mAh</span>
                         </div>
                         <div class="flex justify-between border-b border-gray-100 pb-2">
                             <span class="text-gray-600">Input</span>
