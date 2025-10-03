@@ -18,7 +18,7 @@ function loadPage(page) {
 
         // Page-specific init
         if (page === "home") initHome();
-        if (page === "product") {
+        if (page === "products") {
           // load model-viewer, then run product carousel init
           loadModelViewerOnce(() => {
             // optional: further JS to interact with the viewer can go here
@@ -150,7 +150,8 @@ document.addEventListener("DOMContentLoaded", () => {
   page("/", () => loadPage("home"));
   page("/about", () => loadPage("about"));
   page("/accs", () => loadPage("accs"));
-  page("/product", () => loadPage("product"));
+  page("/products", () => loadPage("products"));
+  page("/product-info", () => loadPage("product-info"));
 
   // Redirect if user hits /index.html
   if (location.pathname === "/index.html") page.redirect("/");

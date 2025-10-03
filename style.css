@@ -276,9 +276,90 @@ nav-links::before {
 /* ========== PRODUCT SECTION ========== */
 /* ----- Global ----- */
 
-.product-page-info{
+.product-page-info {
   background-color: #fff;
   padding: 10% 10%;
+}
+
+
+/* PRODUCT */
+#product-page {
+  padding: 20px;
+  max-width: 1200px;
+  /* keeps total width manageable */
+  margin: 0 auto;
+  /* centers whole block */
+}
+
+#product-page .product-grid {
+  display: flex;
+  justify-content: center;
+  /* centers the row */
+  gap: 20px;
+  /* spacing between items */
+  flex-wrap: wrap;
+  /* makes them wrap on smaller screens */
+}
+
+#product-page h1 {
+  margin-bottom: 20px;
+}
+
+
+
+#product-page .product-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+#product-page .product-card:hover {
+  transform: translateY(-5px);
+}
+
+#product-page .tag {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+#product-page .product-card img {
+  width: 100%;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+#product-page .product-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 5px 0;
+}
+
+#product-page .product-category {
+  font-size: 14px;
+  color: gray;
+}
+
+#product-page .price {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+#product-page .choose-btn {
+  background: black;
+  color: white;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#product-page .choose-btn:hover {
+  background: #444;
 }
 
 
