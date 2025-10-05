@@ -238,7 +238,7 @@ nav-links::before {
   height: 100%;
   z-index: -1;
   overflow: hidden;
-  background: #313131;
+  background: #ffffff;
   /* fallback */
   transition: background 1s ease;
 }
@@ -277,8 +277,14 @@ nav-links::before {
 /* ----- Global ----- */
 
 .product-page-info {
-  background-color: #fff;
+  background-color: #817e7e;
   padding: 10% 10%;
+    max-width: 1100px;
+  margin: 100px auto;
+  padding: 40px;
+  border-radius: 20px;
+  background: rgba(120, 115, 115, 0.6);
+  color: #ff9797;
 }
 
 
