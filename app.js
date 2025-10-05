@@ -4,7 +4,6 @@
 function loadPage(page) {
   const app = document.getElementById("app");
 
-  // Fade-out before loading new content
   app.classList.add("fade-out");
 
   setTimeout(() => {
@@ -19,28 +18,46 @@ function loadPage(page) {
         // Page-specific init
         if (page === "home") initHome();
         if (page === "products") {
-          // load model-viewer, then run product carousel init
           loadModelViewerOnce(() => {
-            // optional: further JS to interact with the viewer can go here
             initProductCarousel();
           });
         }
+
         // Fade-in new content
         app.classList.remove("fade-out");
         app.classList.add("fade-in");
         setTimeout(() => app.classList.remove("fade-in"), 500);
+
+        // Re-attach mobile offcanvas link listeners
+        setupOffcanvasLinks();
       })
       .catch((err) => {
         console.error("Error loading page:", err);
-        app.innerHTML =
-          "<p style='color:red; text-align:center;'>⚠️ Failed to load page.</p>";
+        app.innerHTML = "<p style='color:red; text-align:center;'>⚠️ Failed to load page.</p>";
         app.classList.remove("fade-out");
       });
   }, 300);
 }
 
 // ------------------------------
-// Home Page Animation + Video Logic
+// Mobile Offcanvas SPA-safe
+// ------------------------------
+function setupOffcanvasLinks() {
+  const mobileNav = document.getElementById("mobileNav");
+  if (!mobileNav) return;
+
+  const bsOffcanvas = bootstrap.Offcanvas.getOrCreateInstance(mobileNav);
+  const links = mobileNav.querySelectorAll("a.nav-link");
+
+  links.forEach((link) => {
+    link.addEventListener("click", () => {
+      bsOffcanvas.hide(); // Close offcanvas when link clicked
+    });
+  });
+}
+
+// ------------------------------
+// Home Page Animation + Video
 // ------------------------------
 function initHome() {
   const title = document.getElementById("kaze");
@@ -50,13 +67,11 @@ function initHome() {
 
   if (!overlay || !title) return;
 
-  // Fade-in overlay
   overlay.style.opacity = 0;
   setTimeout(() => {
     overlay.style.opacity = 1;
   }, 500);
 
-  // Text swap animation
   function changeText() {
     title.classList.remove("glow");
     title.style.opacity = 0;
@@ -72,7 +87,6 @@ function initHome() {
   changeText();
   setInterval(changeText, 5000);
 
-  // 🔹 Video background → fallback color after end
   const video = document.getElementById("bg-video");
   const container = document.querySelector(".video-container");
 
@@ -80,10 +94,10 @@ function initHome() {
     video.addEventListener(
       "ended",
       () => {
-        video.style.display = "none"; // hide video
-        container.style.background = "#111"; // or use fallback image
+        video.style.display = "none";
+        container.style.background = "#111";
       },
-      { once: true } // only fire once
+      { once: true }
     );
   }
 }
@@ -117,7 +131,6 @@ function initProductCarousel() {
     updateCarousel();
   });
 
-  // Auto-slide every 5 seconds
   setInterval(() => {
     currentIndex = (currentIndex + 1) % slides.length;
     updateCarousel();
@@ -125,56 +138,36 @@ function initProductCarousel() {
 }
 
 // ------------------------------
-// Mobile Hamburger Menu (SPA-safe)
-// ------------------------------
-document.addEventListener("click", (e) => {
-  const navLinks = document.querySelector(".nav-links");
-  if (!navLinks) return;
-
-  // Toggle menu when hamburger clicked
-  if (e.target.matches(".menu-toggle")) {
-    navLinks.classList.toggle("show");
-  }
-
-  // Close menu when a nav link is clicked
-  if (e.target.closest(".nav-links a")) {
-    navLinks.classList.remove("show");
-  }
-});
-
-// ------------------------------
 // SPA Routing
 // ------------------------------
 document.addEventListener("DOMContentLoaded", () => {
-  // SPA routing with page.js
+  setupOffcanvasLinks(); // Attach first time
+
   page("/", () => loadPage("home"));
   page("/about", () => loadPage("about"));
   page("/accs", () => loadPage("accs"));
   page("/products", () => loadPage("products"));
   page("/product-info", () => loadPage("product-info"));
 
-  // Redirect if user hits /index.html
   if (location.pathname === "/index.html") page.redirect("/");
 
   page();
 });
 
-
-
-// Lazy load model-viewer for product page (only once)
+// ------------------------------
+// Lazy load model-viewer for product page
+// ------------------------------
 function loadModelViewerOnce(callback) {
   if (window._modelViewerLoaded) {
     if (callback) callback();
     return;
   }
 
-  // Use module build (modern browsers)
   const s = document.createElement("script");
   s.type = "module";
   s.src = "https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js";
   s.onload = () => {
     window._modelViewerLoaded = true;
-    console.log("model-viewer loaded");
     if (callback) callback();
   };
   s.onerror = () => {
