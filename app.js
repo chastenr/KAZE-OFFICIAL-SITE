@@ -143,11 +143,17 @@ function initProductCarousel() {
 document.addEventListener("DOMContentLoaded", () => {
   setupOffcanvasLinks(); // Attach first time
 
+  // Defined SPA routes
   page("/", () => loadPage("home"));
   page("/about", () => loadPage("about"));
   page("/accs", () => loadPage("accs"));
   page("/products", () => loadPage("products"));
   page("/product-info", () => loadPage("product-info"));
+
+  // SPA fallback: redirect unknown routes to home
+  page("*", () => {
+    page.redirect("/");
+  });
 
   if (location.pathname === "/index.html") page.redirect("/");
 
