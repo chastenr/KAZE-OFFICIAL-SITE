@@ -22,6 +22,8 @@ function loadPage(page) {
             initProductCarousel();
           });
         }
+        initProductGallery();
+        feather.replace(); // Refresh Feather icons
 
         // Fade-in new content
         app.classList.remove("fade-out");
@@ -33,7 +35,8 @@ function loadPage(page) {
       })
       .catch((err) => {
         console.error("Error loading page:", err);
-        app.innerHTML = "<p style='color:red; text-align:center;'>⚠️ Failed to load page.</p>";
+        app.innerHTML =
+          "<p style='color:red; text-align:center;'>⚠️ Failed to load page.</p>";
         app.classList.remove("fade-out");
       });
   }, 300);
@@ -181,4 +184,36 @@ function loadModelViewerOnce(callback) {
     if (callback) callback();
   };
   document.head.appendChild(s);
+}
+
+function initProductGallery() {
+  const viewer = document.getElementById("product-viewer");
+  const image = document.getElementById("product-image");
+  const thumbs = document.querySelectorAll(".thumb");
+
+  if (!viewer || !image || !thumbs.length) return;
+
+  thumbs.forEach((thumb) => {
+    thumb.addEventListener("click", () => {
+      // Clear active state
+      thumbs.forEach((t) => t.classList.remove("active"));
+      thumb.classList.add("active");
+
+      const type = thumb.dataset.type;
+      const src = thumb.dataset.src;
+
+      if (type === "model") {
+        // Show 3D model, hide image
+        viewer.style.display = "block";
+        image.style.display = "none";
+      } else if (type === "image" && src) {
+        // Show image, hide 3D model
+        image.src = src;
+        image.style.display = "block";
+        viewer.style.display = "none";
+      }
+    });
+  });
+
+  console.log("✅ Product gallery initialized");
 }

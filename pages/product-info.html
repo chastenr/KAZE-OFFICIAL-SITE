@@ -3,41 +3,47 @@
     <main class="product-page-info">
         <div class="lg:grid lg:grid-cols-2 lg:gap-12">
             <!-- Product Gallery -->
-            <div class="mb-8 lg:mb-0">
-                <model-viewer id="product-viewer"
-                    src="https://res.cloudinary.com/dczzibbkw/image/upload/v1758918395/Kaze_Device_0915172902_texture_o8k4af.glb"
-                    alt="KAZE Power Bank A28 3D model" poster="/image/Kaze-logo-white-256.webp" loading="lazy"
-                    camera-controls auto-rotate exposure="1" ar ar-modes="webxr scene-viewer quick-look"
-                    style="width:100%; height:100%; min-height:320px; border-radius:6px;">
-                </model-viewer>
-                <!-- <div class="product-gallery flex overflow-x-auto space-x-4 pb-4 mb-4">
-                    <div class="gallery-item flex-shrink-0 w-full">
-                        <img src="http://static.photos/technology/1024x576/101" alt="KAZE PowerBank Front View"
-                            class="rounded-lg w-full h-auto">
-                    </div>
-                    <div class="gallery-item flex-shrink-0 w-full">
-                        <img src="http://static.photos/technology/1024x576/102" alt="KAZE PowerBank Side View"
-                            class="rounded-lg w-full h-auto">
-                    </div>
-                    <div class="gallery-item flex-shrink-0 w-full">
-                        <img src="http://static.photos/technology/1024x576/103" alt="KAZE PowerBank in Use"
-                            class="rounded-lg w-full h-auto">
-                    </div>
+            <div class="product-gallery-container">
+                <div class="viewer-wrapper" id="viewer-container">
+                    <!-- 3D MODEL -->
+                    <model-viewer id="product-viewer"
+                        src="https://res.cloudinary.com/dczzibbkw/image/upload/v1758918395/Kaze_Device_0915172902_texture_o8k4af.glb"
+                        alt="KAZE Power Bank A28 3D model" poster="/image/Kaze-logo-white-256.webp" camera-controls
+                        auto-rotate exposure="1" ar ar-modes="webxr scene-viewer quick-look">
+                    </model-viewer>
+
+                    <!-- IMAGE VIEWER -->
+                    <img id="product-image"
+                        src="https://res.cloudinary.com/dczzibbkw/image/upload/v1758918401/Kaze_Powerbank_front.jpg"
+                        alt="KAZE Power Bank" class="hidden-image" />
                 </div>
-                <div class="flex space-x-2">
-                    <button class="w-16 h-16 rounded border border-gray-200 overflow-hidden">
-                        <img src="http://static.photos/technology/200x200/101" alt="Thumbnail 1"
-                            class="w-full h-full object-cover">
+
+                <!-- Thumbnails -->
+                <div class="thumbnails">
+                    <!-- 3D Thumbnail -->
+                    <button class="thumb active" data-type="model">
+                        <img src="/image/Kaze-logo-white-256.webp" alt="3D Model Thumbnail">
                     </button>
-                    <button class="w-16 h-16 rounded border border-gray-200 overflow-hidden">
-                        <img src="http://static.photos/technology/200x200/102" alt="Thumbnail 2"
-                            class="w-full h-full object-cover">
+
+                    <!-- Image Thumbnails -->
+                    <button class="thumb" data-type="image"
+                        data-src="https://res.cloudinary.com/dczzibbkw/image/upload/v1759511179/KAZEPB_twbrwc.webp">
+                        <img src="https://res.cloudinary.com/dczzibbkw/image/upload/v1759511179/KAZEPB_twbrwc.webp"
+                            alt="Front">
                     </button>
-                    <button class="w-16 h-16 rounded border border-gray-200 overflow-hidden">
-                        <img src="http://static.photos/technology/200x200/103" alt="Thumbnail 3"
-                            class="w-full h-full object-cover">
+
+                    <button class="thumb" data-type="image"
+                        data-src="https://res.cloudinary.com/dczzibbkw/image/upload/v1758918401/Kaze_Powerbank_side.jpg">
+                        <img src="https://res.cloudinary.com/dczzibbkw/image/upload/v1758918401/Kaze_Powerbank_side.jpg"
+                            alt="Side">
                     </button>
-                </div> -->
+
+                    <button class="thumb" data-type="image"
+                        data-src="https://res.cloudinary.com/dczzibbkw/image/upload/v1758918401/Kaze_Powerbank_inuse.jpg">
+                        <img src="https://res.cloudinary.com/dczzibbkw/image/upload/v1758918401/Kaze_Powerbank_inuse.jpg"
+                            alt="In Use">
+                    </button>
+                </div>
             </div>
 
             <!-- Product Info -->
@@ -77,9 +83,10 @@
                 <div class="mb-6">
                     <h3 class="font-medium text-gray-900 mb-2">Capacity</h3>
                     <div class="flex space-x-3">
-                   
-                        <button class="px-4 py-2 border border-gray-300 rounded-md bg-indigo-100 border-indigo-500">26,800mAh</button>
-                    
+
+                        <button
+                            class="px-4 py-2 border border-gray-300 rounded-md bg-indigo-100 border-indigo-500">26,800mAh</button>
+
                     </div>
                 </div>
 
@@ -88,7 +95,7 @@
                         class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg font-medium flex-1 transition flex items-center justify-center">
                         <i data-feather="shopping-cart" class="mr-2"></i> Add to Cart
                     </button>
-               
+
                 </div>
 
                 <div class="border-t border-b border-gray-200 py-4 mb-6">
@@ -194,11 +201,11 @@
                     <div class="feature-card bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition">
                         <div
                             class="feature-icon bg-indigo-100 w-12 h-12 rounded-full flex items-center justify-center mb-3">
-                            <i data-feather="watch" class="text-indigo-600"></i>
+                            <i data-feather="briefcase" class="text-indigo-600"></i>
                         </div>
                         <h4 class="font-medium mb-1">Portable Design</h4>
                         <p class="text-gray-600 text-sm">Easily fits with laptops and works with most devicest</p>
-                        
+
                     </div>
                 </div>
             </div>
